@@ -1,7 +1,6 @@
 package edu.gatech.clairvoyance.remote;
 import java.io.*;
-import java.util.Arrays;
-
+import java.util.ArrayList;
 import com.jcraft.jsch.*;
 
 public class RemoteFileSystem {
@@ -9,9 +8,6 @@ public class RemoteFileSystem {
 	private String username;
 	private String password;
 	private Session session;
-	private Channel shell;
-	private PrintWriter output;
-	private BufferedReader input;
 	private String currentDir;
 	
 	public RemoteFileSystem(String hostName){
@@ -24,6 +20,10 @@ public class RemoteFileSystem {
 	}
 	
 	public void setHostName(String hostname){
+		if (isConnected()) {
+			throw new IllegalStateException(
+					"Cannot set host name because the connection is already established.\nIf you want to change the server, please disconnect first.\n");
+		}
 		if(hostname == null){
 			throw new IllegalArgumentException("Host name should not be null.");
 		}
@@ -31,6 +31,10 @@ public class RemoteFileSystem {
 	}
 	
 	public void setUserConfidentials(String username, String password){
+		if (isConnected()) {
+			throw new IllegalStateException(
+					"Cannot set user confidential while the connection is already established.\nIf you want to change user, please disconnect first.\n");
+		}
 		if(username == null){
 			throw new IllegalArgumentException("Username should not be null.");
 		}
@@ -42,72 +46,40 @@ public class RemoteFileSystem {
 	}
 	
 	public boolean connect(){
-		shell=getShellChannel();
-		if(shell == null){
+		if(isConnected()){
+			throw new IllegalStateException("The remote file system is already connected.");
+		}
+		if(!startSession()){
+			disconnect();
 			return false;
 		}
-		
-		
+		ExecResult result=null;
 		try {
-			output=new PrintWriter(shell.getOutputStream(),true);
-		} catch (IOException e) {
+			result = executeCommand("pwd");
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 			disconnect();
 			return false;
 		}
-		try {
-			input=new BufferedReader(new InputStreamReader(shell.getInputStream()));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		
+		if(result.exitCode != 0){
 			disconnect();
 			return false;
 		}
-		output.println("pwd");
-		System.out.println("Getting current directory from the server.");
-		for(int i=0;i<5;++i){
-			System.err.println("Flushing initial message("+i+"): ");
-			try {
-				Thread.sleep(3000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			clearInputStream();
-			
-		}
-		return true;
-		/*
 		
 		
-		try {
-			System.out.println("Waiting for server's response");
-			currentDir=input.readLine();
-			System.out.println("Got current directory name");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			disconnect();
-			return false;
-		}
-		//There shouldn't be anything else in the input stream.
-		//Check it just for safety.
-		System.out.println("Clearing input stream");
-		if(clearInputStream()){
-			System.err.println("Warning: Unexpected response from the remote server");
-		}
+		currentDir=result.output.get(0);
+		
 		return true;
-		*/
+		
 	}
 	public void disconnect(){
 		if(session == null){
 			return;
 		}
 		session.disconnect();
-		shell=null;
-		input=null;
-		output=null;
+		
 		session=null;
 		currentDir=null;
 	}
@@ -123,8 +95,101 @@ public class RemoteFileSystem {
 			throw new IllegalStateException("Not conneted to remote file system.");
 		}
 	}
+	/**
+	 * This function may expose security risks.
+	 * We may need to impose more strict check on the directoryName parameter.
+	 * 
+	 * @param directoryName
+	 * @return
+	 */
+	public boolean changeDirectory(String directoryName){
+		if(directoryName.contains("\"") || directoryName.contains("\n") ||directoryName.contains("\r")){
+			throw new IllegalArgumentException("Directory path cannot contain quotes or line feeds.");
+		}
+		String oldPath=currentDir;
+		if(directoryName.startsWith("/")){
+			//Absolute path
+			currentDir=directoryName;
+		}else{
+			//Relative path
+			currentDir=currentDir+"/"+directoryName;
+		}
+		ExecResult result=null;
+		try {
+			result=executeCommand("pwd");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			currentDir=oldPath;
+			return false;
+		} 
+		if(result == null || result.exitCode != 0){
+			currentDir=oldPath;
+			return false;
+		}else{
+			currentDir=result.output.get(0);
+			return true;
+		}
 	
-	private Channel getShellChannel(){
+		
+	}
+	
+	public ArrayList<String> listAll(){
+		ArrayList<String> files=listFiles();
+		ArrayList<String> dirs=listSubdirectories();
+		if(files != null){
+			if(dirs != null){
+				files.addAll(dirs);
+			}
+			return files;
+		}else{
+			return dirs;
+		}
+		
+	}
+	
+	public ArrayList<String> listFiles(){
+		ExecResult result=null;
+		try {
+			result=executeCommand("ls -l | grep ^-");
+		} catch (JSchException | IOException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		if(result == null || result.exitCode != 0){
+			return null;
+		}
+		ArrayList<String> files=new ArrayList<String>();
+		for(String info:result.output){
+			String[] fields=info.split("\\s+");
+			files.add(fields[fields.length-1]);
+		}
+		return files;
+	}
+	
+	public ArrayList<String> listSubdirectories(){
+		ExecResult result=null;
+		try {
+			result=executeCommand("ls -l | grep ^d");
+		} catch (JSchException | IOException e) {
+			
+			e.printStackTrace();
+			return null;
+		}
+		if(result == null || result.exitCode != 0){
+			return null;
+		}
+		ArrayList<String> files=new ArrayList<String>();
+		for(String info:result.output){
+			String[] fields=info.split("\\s+");
+			files.add(fields[fields.length-1]);
+		}
+		return files;
+		
+	}
+	
+	private boolean startSession(){
 		assert(hostName != null);
 		if(username == null || password == null ){
 			throw new IllegalStateException("User confidential is not specified.");
@@ -138,7 +203,7 @@ public class RemoteFileSystem {
 			
 			e.printStackTrace();
 			session=null;
-			return null;
+			return false;
 		}
 		session.setPassword(password);
 		session.setConfig("StrictHostKeyChecking", "no");
@@ -149,43 +214,44 @@ public class RemoteFileSystem {
 			
 			e.printStackTrace();
 			session=null;
-			return null;
-		}
-		Channel shell=null;
-		try {
-			shell=session.openChannel("shell");
-			
-			shell.connect(); 
-			System.out.println("Shell channel opened");
-		} catch (JSchException e) {
-			
-			e.printStackTrace();
-			session.disconnect();
-			session=null;
-			return null;
+			return false;
 		}
 		
-		return shell;
+		
+		return true;
 	}
 	
-	private boolean clearInputStream(){
-		boolean result=false;
-		char[] buffer=new char[128];
-		try {
-			while(input.ready()){
-				input.read(buffer);
-				System.err.print(new String(buffer));
-				Arrays.fill(buffer, (char) 0);
-				result=true;
-			}
-			if(result){
-				System.err.println();
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.err.println("IOException when clearing input stream");
+	private ExecResult executeCommand(String command) throws JSchException, IOException{
+		if(session == null){
+			throw new IllegalStateException("Not conneted to remote file system.");
 		}
+		
+		ChannelExec exec=(ChannelExec)session.openChannel("exec");
+		
+		if(currentDir != null){
+			command="cd \""+currentDir+"\" && "+command;
+		}
+		exec.setCommand(command);
+		exec.connect();
+		ExecResult result=new ExecResult();
+		
+		ArrayList<String> output=new ArrayList<String>();
+		BufferedReader reader=new BufferedReader(new InputStreamReader(exec.getInputStream()));
+		String line=null;
+		while((line=reader.readLine())!=null){
+			output.add(line);
+		}
+		result.output=output;
+		result.exitCode=exec.getExitStatus();
+		
+		reader=new BufferedReader(new InputStreamReader(exec.getErrStream()));
+		line=null;
+		ArrayList<String> errput=new ArrayList<String>();
+		while((line=reader.readLine())!=null){
+			errput.add(line);
+		}
+		result.errput=errput;
+		
 		return result;
 	}
 
