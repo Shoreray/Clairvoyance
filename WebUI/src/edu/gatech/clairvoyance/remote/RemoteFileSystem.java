@@ -8,6 +8,9 @@ public class RemoteFileSystem {
 	private String username;
 	private String password;
 	private Session session;
+	//There is a bug (problem) in some OpenSSH implementation that if all open channels are closed,
+	//the session will be automatically closed.
+	private Channel keepAlive;
 	private String currentDir;
 	
 	public RemoteFileSystem(String hostName){
@@ -218,7 +221,14 @@ public class RemoteFileSystem {
 			session=null;
 			return false;
 		}
-		
+		try {
+			keepAlive=session.openChannel("shell");
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			session=null;
+			return false;
+		}
 		
 		return true;
 	}
@@ -234,19 +244,24 @@ public class RemoteFileSystem {
 			command="cd \""+currentDir+"\" && "+command;
 		}
 		exec.setCommand(command);
+		exec.setInputStream(null);
+		exec.setErrStream(null);
+		InputStream inStream=exec.getInputStream();
+		InputStream errStream=exec.getErrStream();
 		exec.connect();
 		ExecResult result=new ExecResult();
 		
 		ArrayList<String> output=new ArrayList<String>();
-		BufferedReader reader=new BufferedReader(new InputStreamReader(exec.getInputStream()));
+		//BufferedReader reader=new BufferedReader(new InputStreamReader(inStream));
 		String line=null;
-		while((line=reader.readLine())!=null){
+		char[] buffer=new char[1024];
+		while(inStream.){
 			output.add(line);
 		}
 		result.output=output;
 		result.exitCode=exec.getExitStatus();
 		
-		reader=new BufferedReader(new InputStreamReader(exec.getErrStream()));
+		reader=new BufferedReader(new InputStreamReader(errStream));
 		line=null;
 		ArrayList<String> errput=new ArrayList<String>();
 		while((line=reader.readLine())!=null){
@@ -257,5 +272,11 @@ public class RemoteFileSystem {
 		return result;
 	}
 	
+	ChannelExec getChannelExec() throws JSchException{
+		if(!isConnected()){
+			throw new IllegalStateException("Not connected to remote file system");
+		}
+		return (ChannelExec) session.openChannel("exec");
+	}
 
 }
