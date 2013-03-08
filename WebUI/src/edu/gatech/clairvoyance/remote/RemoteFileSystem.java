@@ -98,6 +98,8 @@ public class RemoteFileSystem {
 	/**
 	 * This function may expose security risks.
 	 * We may need to impose more strict check on the directoryName parameter.
+	 * The severity is not very high because what the user can do is still confined 
+	 * by its privileges associated with the SSH user.
 	 * 
 	 * @param directoryName
 	 * @return
@@ -190,15 +192,15 @@ public class RemoteFileSystem {
 	}
 	
 	private boolean startSession(){
-		assert(hostName != null);
+		
 		if(username == null || password == null ){
 			throw new IllegalStateException("User confidential is not specified.");
 		}
 		JSch jsch=new JSch();
-		System.out.println("Jsch instance initialized.");
+		//System.out.println("Jsch instance initialized.");
 		try {
 			session=jsch.getSession(username, hostName);
-			System.out.println("Jsch session created.");
+			//System.out.println("Jsch session created.");
 		} catch (JSchException e) {
 			
 			e.printStackTrace();
@@ -209,8 +211,8 @@ public class RemoteFileSystem {
 		session.setConfig("StrictHostKeyChecking", "no");
 		try {
 			session.connect(30000);
-			System.out.println("Jsch session connected.");
-		} catch (JSchException e) {
+			//System.out.println("Jsch session connected.");
+		} catch (Exception e) {
 			
 			e.printStackTrace();
 			session=null;
@@ -254,5 +256,6 @@ public class RemoteFileSystem {
 		
 		return result;
 	}
+	
 
 }
