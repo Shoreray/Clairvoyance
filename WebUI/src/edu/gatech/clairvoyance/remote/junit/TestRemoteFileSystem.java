@@ -18,10 +18,10 @@ public class TestRemoteFileSystem {
 	
 	@Before
 	public void setup(){
-		//rfs=new RemoteFileSystem("invent.cc.gt.atl.ga.us");
-		rfs=new RemoteFileSystem("killerbee1.cc.gatech.edu");
-		//rfs.setUserConfidentials("clair", "123"); 
-		rfs.setUserConfidentials("xli354", "Cappucc1n@"); 
+		rfs=new RemoteFileSystem("invent.cc.gt.atl.ga.us");
+		//rfs=new RemoteFileSystem("killerbee1.cc.gatech.edu");
+		rfs.setUserConfidentials("clair", "123"); 
+		//rfs.setUserConfidentials("xli354", "Cappucc1n@"); 
 	}
 	
 	@After

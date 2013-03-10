@@ -72,7 +72,7 @@ public class RemoteFileSystem {
 		}
 		
 		
-		currentDir=result.output.get(0);
+		currentDir=result.getOutput().get(0);
 		
 		return true;
 		
@@ -132,7 +132,7 @@ public class RemoteFileSystem {
 			currentDir=oldPath;
 			return false;
 		}else{
-			currentDir=result.output.get(0);
+			currentDir=result.getOutput().get(0);
 			return true;
 		}
 	
@@ -166,7 +166,7 @@ public class RemoteFileSystem {
 			return null;
 		}
 		ArrayList<String> files=new ArrayList<String>();
-		for(String info:result.output){
+		for(String info:result.getOutput()){
 			String[] fields=info.split("\\s+");
 			files.add(fields[fields.length-1]);
 		}
@@ -186,7 +186,7 @@ public class RemoteFileSystem {
 			return null;
 		}
 		ArrayList<String> files=new ArrayList<String>();
-		for(String info:result.output){
+		for(String info:result.getOutput()){
 			String[] fields=info.split("\\s+");
 			files.add(fields[fields.length-1]);
 		}
@@ -218,11 +218,13 @@ public class RemoteFileSystem {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
+			
 			session=null;
 			return false;
 		}
 		try {
 			keepAlive=session.openChannel("shell");
+			keepAlive.connect();
 		} catch (JSchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -233,7 +235,7 @@ public class RemoteFileSystem {
 		return true;
 	}
 	
-	private ExecResult executeCommand(String command) throws JSchException, IOException{
+	ExecResult executeCommand(String command) throws JSchException, IOException{
 		if(session == null){
 			throw new IllegalStateException("Not conneted to remote file system.");
 		}
@@ -251,24 +253,35 @@ public class RemoteFileSystem {
 		exec.connect();
 		ExecResult result=new ExecResult();
 		
-		ArrayList<String> output=new ArrayList<String>();
-		//BufferedReader reader=new BufferedReader(new InputStreamReader(inStream));
-		String line=null;
-		char[] buffer=new char[1024];
-		while(inStream.){
-			output.add(line);
+		//ArrayList<String> output=new ArrayList<String>();
+		BufferedReader reader=new BufferedReader(new InputStreamReader(inStream));
+		
+		//String line=null;
+		StringBuilder output=new StringBuilder();
+		byte[] buffer=new byte[1024];
+		int bytesRead=0;
+		while((bytesRead=inStream.read(buffer))!=-1){
+			output.append(new String(buffer,0,bytesRead));
 		}
-		result.output=output;
+		result.rawOutput=output.toString();
+		
+		
+		//reader=new BufferedReader(new InputStreamReader(errStream));
+		//line=null;
+		//ArrayList<String> errput=new ArrayList<String>();
+		StringBuilder errput=new StringBuilder();
+		bytesRead=0;
+		while((bytesRead=errStream.read(buffer))!=-1){
+			errput.append(new String(buffer,0,bytesRead));
+		}
+		result.rawErrput=errput.toString();
+		
+		//For testing only
+		if(!exec.isClosed()){
+			throw new RuntimeException("Unexpected situation where input streams are ended but channel is not closed.");
+		}
+		
 		result.exitCode=exec.getExitStatus();
-		
-		reader=new BufferedReader(new InputStreamReader(errStream));
-		line=null;
-		ArrayList<String> errput=new ArrayList<String>();
-		while((line=reader.readLine())!=null){
-			errput.add(line);
-		}
-		result.errput=errput;
-		
 		return result;
 	}
 	
