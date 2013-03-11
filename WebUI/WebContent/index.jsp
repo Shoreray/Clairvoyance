@@ -47,14 +47,14 @@
 			}
 		</style>
 		
-		<script src="../js/jquery-1.9.1.js" type="text/javascript"></script>
-		<script src="../js/jquery.easing.1.3.js" type="text/javascript"></script>
-		<script src="../js/jqueryFileTree.js" type="text/javascript"></script>
-		<link href="../css/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
+		<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
+		<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+		<script src="js/jqueryFileTree.js" type="text/javascript"></script>
+		<link href="css/jqueryFileTree.css" rel="stylesheet" type="text/css" media="screen" />
 		
 		<script type="text/javascript">	
 			$(document).ready( function() {
-				$('#fileTreeDemo_1').fileTree({ root: '/', script: '../connectors/jqueryFileTree.jsp' }, function(file) { 
+				$('#fileTreeDemo_1').fileTree({ root: '../', script: 'connectors/jqueryFileTree.jsp' }, function(file) { 
 					alert(file);
 				});
 				
