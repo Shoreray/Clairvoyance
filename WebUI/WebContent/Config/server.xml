@@ -1,0 +1,12 @@
+<config>
+	<root>../</root>
+	<parser>
+		<value>parser1</value>
+		<value>parser2</value>
+	</parser>
+	<server>
+		<value>server1</value>
+		<value>server2</value>
+		<value>server3</value>
+	</server>
+</config>

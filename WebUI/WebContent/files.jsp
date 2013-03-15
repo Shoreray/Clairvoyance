@@ -1,8 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"
+    import="java.io.File,java.io.FilenameFilter,java.util.Arrays"%>
+<%
+	String dir=request.getParameter("dir");
+	String test="fail";
+	if (new File(dir).exists()) {
+		test="success";
+	}
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-				
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<style type="text/css">
 			BODY,
 			HTML {
@@ -55,46 +64,32 @@
 		<script type="text/javascript">	
 			$(document).ready( function() {
 				$.get("Config/server.xml", function(data) {
-					var root = $(data).find('root').text();
+					var parsers = "<select id='parser' name='parser'>";
+					$(data).find('parser').find('value').each(function(){
+						parsers += "<option value='" + $(this).text() +"'>" + $(this).text() + "</option>";
+					});
+					parsers += "</select>";
 					
-					$('#fileTreeDemo_1').fileTree({ root: root, script: 'connectors/jqueryFileTreeDirOnly.jsp' }, function(file) { 
-
-					}, function(dir){
-						$('#dirSpan').text(dir);
-						$('.dir').val(dir);
-				    });
-				})
-				.fail(function() { 
-					alert("can't find config file, will set the root directory to '/''"); 
+					var servers = "<select id='server' name='server'>";
+					$(data).find('server').find('value').each(function(){
+						servers += "<option value='" + $(this).text() +"'>" + $(this).text() + "</option>";
+					});
+					servers += "</select>";
 					
-					$('#fileTreeDemo_1').fileTree({ root: "/", script: 'connectors/jqueryFileTreeDirOnly.jsp' }, function(file) { 
-
-					}, function(dir){
-						$('#dirSpan').text(dir);
-						$('.dir').val(dir);
-				    });
+					var root = $('#dir').text();
+					$.post('connectors/jqueryFileTreeForFiles.jsp', 
+							{ dir: root, parser : parsers, server : servers}, function(data) {
+						$('#test').append(data);
+					});
 				});
 			});
 		</script>
-		
-		<title>Clairvoyance</title>
-		
+		<title>Insert title here</title>
 	</head>
-	
 	<body>
-		<h1>Clairvoyance project</h1>
-		<h2>Choose the directory you want to browse for files:</h2>
-		<h3>The directory you chose: <span id="dirSpan"></span></h3>
-		<form name="files" method="get" action="files.jsp">
-			<input class="dir" name="dir" type="hidden"></input>
-			<input type="submit" name="submit" value="Find files">
-		</form>
-		<form name="subdirs" method="get" action="dirs.jsp">
-			<input class="dir" name="dir" type="hidden"></input>
-			<input type="submit" name="submit" value="Find sub directories">
-		</form>
-		<div class="example">
-			<div id="fileTreeDemo_1" class="demo"></div>
-		</div>
+		<h2>Read directory <%=test%>!</h2>
+		<h2>The files in : <span id="dir"><%=dir%></span></h2>
+		<h2>Please select parser and server</h2>
+		<div id="test"></div>
 	</body>
 </html>
