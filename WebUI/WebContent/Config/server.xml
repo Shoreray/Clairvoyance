@@ -1,5 +1,5 @@
 <config>
-	<root>../</root>
+	<root>/home/xiangyu/ClairvoyanceSampleData</root>
 	<parser>
 		<value>parser1</value>
 		<value>parser2</value>
