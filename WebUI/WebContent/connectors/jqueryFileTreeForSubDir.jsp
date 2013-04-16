@@ -9,7 +9,7 @@
 */	
     String dir = request.getParameter("dir");
 	String mode = request.getParameter("mode");
-	String text = request.getParameter("text");
+	String text = request.getParameter("text"); 
     if (dir == null) {
     	return;
     }
