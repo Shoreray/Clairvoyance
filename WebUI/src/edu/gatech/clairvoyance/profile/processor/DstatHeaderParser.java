@@ -1,4 +1,4 @@
-package dataimport.rubbos;
+package edu.gatech.clairvoyance.profile.processor;
 
 import java.io.BufferedReader;
 import java.io.File;
