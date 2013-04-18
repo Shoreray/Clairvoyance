@@ -1,5 +1,7 @@
+<%@page import="edu.gatech.clairvoyance.session.Directory"%>
 <%@ page
 	import="java.io.File,java.io.FilenameFilter,java.util.Arrays"%>
+<jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
 <%
 /**
   * jQuery File Tree JSP Connector
@@ -7,9 +9,7 @@
   * Copyright 2008 Joshua Gould
   * 21 April 2008
 */	
-    String dir = request.getParameter("dir");
-	String mode = request.getParameter("mode");
-	String text = request.getParameter("text"); 
+    String dir = request.getParameter("dir"); 
     if (dir == null) {
     	return;
     }
@@ -31,9 +31,25 @@
 		Arrays.sort(files, String.CASE_INSENSITIVE_ORDER);
 		out.print("<ul>");
 		// All dirs
+		if(files.length > 0)
+			out.print("<li><span class='file'>Dir name</span><span class='mode nobackground'>mode</span>"
+						+ "<span class='text nobackground'>name</span>"
+						+ "<span class='random nobackground'>randomly</span></li>");
 		for (String file : files) {
 		    if (new File(dir, file).isDirectory()) {
-				out.print("<li>" + file + "</li>" + mode + text);
+				String mode = "<select class='mode' name='" + file + "_mode'>"
+						+ "<option value='ReadOnly'>Read only</option>"
+						+ "<option value='ReadWrite'>Read write</option>"
+						+ "</select>";
+				String text = "<input type='text' name='" + file + "_text' class='text'>";
+				String random = "<select class='random' name='" + file + "_random'>"
+					+ "<option value='true'>true</option>"
+					+ "<option value='false'>false</option>"
+					+ "</select>";
+					
+				out.print("<li><span class='file'>" + file + "</span>" + mode + text + random + "</li>");
+				Directory directory = new Directory(file);
+				data.addSubDir(directory);
 		    }
 		}
 		// All files
