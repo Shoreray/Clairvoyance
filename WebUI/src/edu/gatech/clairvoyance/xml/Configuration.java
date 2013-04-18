@@ -1,14 +1,28 @@
 package edu.gatech.clairvoyance.xml;
 
-import java.io.File;
+import java.io.*;
+import java.util.*;
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 
 import org.w3c.dom.*;
+import edu.gatech.clairvoyance.profile.*;
 
 public class Configuration {
+	
+	private Map<String,List<Profile> > profileMapping;
+	private Map<String,Node> nodeMapping;
+	private ArrayList<WorkLoad> workloadInformation;
+	
+	private String experimentName;
+	private String description;
+	private String user;
+	private String date;
+	private String cloudName;
+	private String applicationName;
+	
 	
 	public static void main(String[] args) throws Exception{
 		//Test creating configuration files
