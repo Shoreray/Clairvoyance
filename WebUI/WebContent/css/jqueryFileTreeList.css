@@ -1,0 +1,16 @@
+.example {
+	float: left;
+	margin: 15px;
+}
+
+.demo {
+	width: 200px;
+	height: 400px;
+	border-top: solid 1px #BBB;
+	border-left: solid 1px #BBB;
+	border-bottom: solid 1px #FFF;
+	border-right: solid 1px #FFF;
+	background: #FFF;
+	overflow: scroll;
+	padding: 5px;
+}
