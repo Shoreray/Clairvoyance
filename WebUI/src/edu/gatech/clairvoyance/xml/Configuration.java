@@ -13,8 +13,8 @@ import edu.gatech.clairvoyance.profile.*;
 public class Configuration {
 	
 	private Map<String,List<Profile> > profileMapping;
-	private Map<String,Node> nodeMapping;
-	private ArrayList<WorkLoad> workloadInformation;
+	private Map<String,Node> nodeMapping=new HashMap<String,Node>();
+	private ArrayList<WorkLoad> workloadInformation=new ArrayList<WorkLoad>();
 	
 	private String experimentName;
 	private String description;
@@ -23,7 +23,92 @@ public class Configuration {
 	private String cloudName;
 	private String applicationName;
 	
+	private DBInfo dbinfo;
 	
+	public void setProfileMapping(Map<String,List<Profile> > mapping){
+		profileMapping=mapping;
+	}
+	
+	public Map<String,List<Profile> > getProfileMapping(){
+		return profileMapping;
+	}
+	
+	public void addNodeMapping(String filename,Node node){
+		nodeMapping.put(filename, node);
+		
+	}
+	
+	public Node getNodeMapping(String filename){
+		return nodeMapping.get(filename);
+	}
+	
+	public void addWorkloadInformation(WorkLoad workload){
+		if(workloadInformation.contains(workload)){
+			return;
+		}
+		workloadInformation.add(workload);
+	}
+	
+	public ArrayList<WorkLoad> getWorkloadInformation(){
+		return workloadInformation;
+	}
+	
+	public String getExperimentName() {
+		return experimentName;
+	}
+
+	public void setExperimentName(String experimentName) {
+		this.experimentName = experimentName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getCloudName() {
+		return cloudName;
+	}
+
+	public void setCloudName(String cloudName) {
+		this.cloudName = cloudName;
+	}
+
+	public String getApplicationName() {
+		return applicationName;
+	}
+
+	public void setApplicationName(String applicationName) {
+		this.applicationName = applicationName;
+	}
+
+	public DBInfo getDbinfo() {
+		return dbinfo;
+	}
+
+	public void setDbinfo(DBInfo dbinfo) {
+		this.dbinfo = dbinfo;
+	}
+	/*
 	public static void main(String[] args) throws Exception{
 		//Test creating configuration files
 		DocumentBuilderFactory docFactory=DocumentBuilderFactory.newInstance();
@@ -77,9 +162,75 @@ public class Configuration {
 		transformer.transform(source, file);
 		
 	}
-
+	*/
+	
 	public String toXML(){
-		return null;
+		StringBuilder buffer=new StringBuilder();
+		buffer.append("\n");
+		buffer.append(XmlHelper.fromTag("name", experimentName));
+		buffer.append(XmlHelper.fromTag("description",description));
+		buffer.append(XmlHelper.fromTag("user",user));
+		buffer.append(XmlHelper.fromTag("date",date));
+		buffer.append(XmlHelper.fromTag("cloud",cloudName));
+		buffer.append(XmlHelper.fromTag("nodecount",""+nodeMapping.values().size()));
+		buffer.append(XmlHelper.fromTag("rampuptime",null));
+		buffer.append(XmlHelper.fromTag("runningtime",null));
+		buffer.append(XmlHelper.fromTag("downramptime",null));
+		buffer.append(XmlHelper.fromTag("application",applicationName));
+		buffer.append("<profiles>\n");
+		ArrayList<Profile> profiles=new ArrayList<Profile>();
+		for(List<Profile> list:profileMapping.values()){
+			for(Profile p:list){
+				if(!profiles.contains(p)){
+					profiles.add(p);
+				}
+			}
+		}
+		for(Profile profile:profiles){
+			buffer.append(profile.toString());
+		}
+		buffer.append("</profiles>\n");
+		buffer.append("<mappings>\n");
+		for(String filename:profileMapping.keySet()){
+			buffer.append("<mapping filename=\"");
+			buffer.append(filename);
+			buffer.append("\" nodename=\"");
+			buffer.append(nodeMapping.get(filename).getName());
+			buffer.append("\" profiles=\"");
+			List<Profile> profilesOfFile=profileMapping.get(filename);
+			
+			for(int i=0;i<profilesOfFile.size();++i){
+				buffer.append(profilesOfFile.get(i).getName());
+				if(i!=profilesOfFile.size()-1){
+					buffer.append(", ");
+				}
+			}
+			buffer.append("\" startwith=\"false\" />");
+		}
+		buffer.append("</mappings>\n");
+		
+		buffer.append("<nodes>\n");
+		ArrayList<Node> nodes=new ArrayList<Node>();
+		for(String filename:nodeMapping.keySet()){
+			if(!nodes.contains(nodeMapping.get(filename))){
+				nodes.add(nodeMapping.get(filename));
+			}
+		}
+		for(Node n:nodes){
+			buffer.append(n.toString());
+		}
+		buffer.append("</nodes>\n");
+		
+		buffer.append("<workloads>\n");
+		for(WorkLoad wl:workloadInformation){
+			buffer.append(wl.toString());
+		}
+		buffer.append("</workloads>\n");
+		
+		buffer.append(dbinfo.toString());
+		
+		buffer.append("</datamapping>\n");
+		return buffer.toString();
 	}
 	
 	

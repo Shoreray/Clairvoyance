@@ -1,8 +1,16 @@
 package edu.gatech.clairvoyance.profile;
 
-public interface Profile {
+public abstract class Profile {
 	
-	public String getName();
+	public abstract String getName();
+	
+	public boolean equals(Object o){
+		if(!(o instanceof Profile)){
+			return false;
+		}
+		Profile p=(Profile)o;
+		return p.getName().equals(this.getName());
+	}
 	
 
 }

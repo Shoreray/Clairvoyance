@@ -9,7 +9,7 @@ import edu.gatech.clairvoyance.profile.*;
  * Date: 8/23/12
  * Time: 4:11 PM
  */
-public class DstatProfile implements Profile{
+public class DstatProfile extends Profile{
     private String name;
     private Map<String, Integer> col2Index;
 

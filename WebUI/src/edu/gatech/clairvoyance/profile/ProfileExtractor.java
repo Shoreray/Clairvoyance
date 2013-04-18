@@ -74,8 +74,9 @@ public class ProfileExtractor {
 	
 	public static void main(String[] args) throws Exception{
 		Map<String,List<Profile> > mapping=(new ProfileExtractor()).getProfileMapping(new File("/home/xiangyu/ClairvoyanceSampleData/2013-03-09T070056-0500"));
-		for(String str:mapping.keySet()){
-        	List<Profile> profiles=mapping.get(str);
+		System.out.println("Value set size: "+mapping.values().size());
+		for(List<Profile> profiles:mapping.values()){
+        	//List<Profile> profiles=mapping.get(str);
         	System.out.println("profiles = "+profiles);
         	break;
         }
