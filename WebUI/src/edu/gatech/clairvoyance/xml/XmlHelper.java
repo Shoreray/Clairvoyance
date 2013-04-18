@@ -3,7 +3,7 @@ package edu.gatech.clairvoyance.xml;
 public class XmlHelper {
 	
 	public static String fromTag(String tag,String value){
-		if(value==null || "".equals(value)){
+		if(value==null){
 			return "<"+tag+" />";
 		}else{
 			StringBuilder buffer=new StringBuilder();

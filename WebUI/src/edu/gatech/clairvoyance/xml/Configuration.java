@@ -2,6 +2,7 @@ package edu.gatech.clairvoyance.xml;
 
 import java.io.*;
 import java.util.*;
+
 import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
@@ -16,12 +17,12 @@ public class Configuration {
 	private Map<String,Node> nodeMapping=new HashMap<String,Node>();
 	private ArrayList<WorkLoad> workloadInformation=new ArrayList<WorkLoad>();
 	
-	private String experimentName;
-	private String description;
-	private String user;
-	private String date;
-	private String cloudName;
-	private String applicationName;
+	private String experimentName="";
+	private String description="";
+	private String user="";
+	private String date="";
+	private String cloudName="";
+	private String applicationName="";
 	
 	private DBInfo dbinfo;
 	
@@ -235,5 +236,9 @@ public class Configuration {
 		return buffer.toString();
 	}
 	
+	public static void main(String[] args) throws Exception{
+		Map<String,List<Profile> > mapping=(new ProfileExtractor()).getProfileMapping(new File("/home/xiangyu/ClairvoyanceSampleData/2013-03-09T070056-0500"));
+		
+	}
 	
 }
