@@ -194,8 +194,10 @@ public class Configuration {
 		for(String filename:profileMapping.keySet()){
 			buffer.append("<mapping filename=\"");
 			buffer.append(filename);
-			buffer.append("\" nodename=\"");
-			buffer.append(nodeMapping.get(filename).getName());
+			if(nodeMapping.get(filename)!=null){
+				buffer.append("\" nodename=\"");
+				buffer.append(nodeMapping.get(filename).getName());
+			}
 			buffer.append("\" profiles=\"");
 			List<Profile> profilesOfFile=profileMapping.get(filename);
 			
