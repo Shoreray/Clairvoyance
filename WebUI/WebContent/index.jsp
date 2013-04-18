@@ -1,8 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-				
+		
+		<!-- -->
 		<style type="text/css">
 			BODY,
 			HTML {
@@ -46,7 +48,8 @@
 				padding: 5px;
 			}
 		</style>
-		
+		 
+		 
 		<script src="js/jquery-1.9.1.js" type="text/javascript"></script>
 		<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
 		<script src="js/jqueryFileTree.js" type="text/javascript"></script>

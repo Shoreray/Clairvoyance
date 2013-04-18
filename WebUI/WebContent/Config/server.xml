@@ -1,5 +1,5 @@
 <config>
-	<root>/home/xiangyu/ClairvoyanceSampleData</root>
+	<root>F:\Gatech\Course\CS 6365\Project</root>
 	<parser>
 		<value>parser1</value>
 		<value>parser2</value>

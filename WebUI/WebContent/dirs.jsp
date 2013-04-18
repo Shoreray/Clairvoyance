@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="java.io.File,java.io.FilenameFilter,java.util.Arrays"%>
+<jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
 <%
 	String dir=request.getParameter("dir");
+	data.dir=dir;
 	String test="fail";
 	if (new File(dir).exists()) {
 		test="success";
 	}
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -80,6 +83,7 @@
 	<body>
 		<h2>Read directory <%=test%>!</h2>
 		<h2>The sub-directories in : <span id="dir"><%=dir%></span></h2>
+		<%=data.dir%>
 		<h2>Please select mode and enter texts</h2>
 		<div id="test"></div>
 	</body>

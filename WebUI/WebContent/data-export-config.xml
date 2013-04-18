@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datamapping>
+<name>1-2-2-2-jedi</name>
+<description>This is to test Jedi - First experiment</description>
+<user>deepla</user>
+<date>2013-03-11</date>
+<cloud>jedi</cloud>
+<nodecount>14</nodecount>
+<rampuptime>480000</rampuptime>
+<runningtime>720000</runningtime>
+<downramptime>30000</downramptime>
+<application>rubbos</application>
+<profiles><profile>
+            <separator> </separator>
+            <resource-name>MODJK</resource-name>
+            <processor-class>dataimport.filter.ApacheLogParser</processor-class>
+            <column
+                                colname="timestamp" datatype="timestamp"
+                                format="hh:mm:ss"
+                                index="3"/>
+            <column
+                                colname="url" datatype="string"
+                                index="6"
+                                size="40"/>
+            <column
+                                colname="restime" datatype="double"
+                                index="7"/>
+            <start-index>400</start-index>
+            <end-index>0</end-index>
+        </profile><profile>
+<separator>,</separator>
+<resource-name>AcceptStory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>Browse</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>BrowseCategories</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>BrowseStoriesInCategory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>ModerateComment</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>OlderStories</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>PostComment</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>Register</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>RegisterUser</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>RejectStory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>ReviewStories</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>Search</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>SearchInComments</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>SearchInStories</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>SearchInUsers</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>StoreComment</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>StoreModerateLog</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>StoreStory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>StoriesOfTheDay</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>SubmitStory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>ViewComment</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>ViewStory</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="restime" datatype="double"
+                                index="0"/>
+<start-index>2</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>TOTAL_CPU_USAGE</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="idl" datatype="double"
+                                index="2"/>
+<column colname="siq"
+                                datatype="double" index="5"/>
+<column
+                                colname="sys" datatype="double"
+                                index="1"/>
+<column colname="hiq"
+                                datatype="double" index="4"/>
+<column
+                                colname="usr" datatype="double"
+                                index="0"/>
+<column colname="wai"
+                                datatype="double"
+                                index="3"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>DSK_TOTAL</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="writ" datatype="double"
+                                index="7"/>
+<column colname="read"
+                                datatype="double"
+                                index="6"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>INTERRUPTS</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="287" datatype="double"
+                                index="10"/>
+<column colname="286"
+                                datatype="double" index="9"/>
+<column
+                                colname="283" datatype="double"
+                                index="8"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>MEMORY_USAGE</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="cach" datatype="double"
+                                index="13"/>
+<column colname="free"
+                                datatype="double" index="14"/>
+<column
+                                colname="buff" datatype="double"
+                                index="12"/>
+<column colname="used"
+                                datatype="double"
+                                index="11"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>NET_TOTAL</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="send" datatype="double"
+                                index="16"/>
+<column colname="recv"
+                                datatype="double"
+                                index="15"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>PROCS</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="new" datatype="double"
+                                index="19"/>
+<column colname="blk"
+                                datatype="double" index="18"/>
+<column
+                                colname="run" datatype="double"
+                                index="17"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>IO_TOTAL</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="writ" datatype="double"
+                                index="21"/>
+<column colname="read"
+                                datatype="double"
+                                index="20"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>SYSTEM</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="csw" datatype="double"
+                                index="23"/>
+<column colname="int"
+                                datatype="double"
+                                index="22"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+<profile>
+<separator>,</separator>
+<resource-name>VIRTUAL_MEMORY</resource-name>
+<processor-class>dataimport.filter.CSVFileProcessor</processor-class>
+<column
+                                colname="minpf" datatype="double"
+                                index="25"/>
+<column colname="majpf"
+                                datatype="double" index="24"/>
+<column
+                                colname="free" datatype="double"
+                                index="27"/>
+<column colname="alloc"
+                                datatype="double"
+                        index="26"/>
+<start-index>10</start-index>
+<end-index>0</end-index>
+</profile>
+</profiles><mappings><mapping
+                        filname="mod_jk.log" nodename="HTTPD"
+                        profiles="MODJK" startwith="false"/>
+<mapping
+                        filname="10.0.16.137.csv" nodename="CONTROL"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.139.csv" nodename="BENCHMARK"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.142.csv" nodename="CLIENT1"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.130.csv" nodename="CLIENT2"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.132.csv" nodename="CLEINT3"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.127.csv" nodename="CLIENT4"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.129.csv" nodename="HTTPD"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.114.csv" nodename="TOMCAT1"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.115.csv" nodename="TOMCAT2"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.116.csv" nodename="MYSQL_MGR"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.109.csv" nodename="MYSQL1"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.112.csv" nodename="MYSQL2"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.113.csv" nodename="MYSQLNDB1"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="10.0.16.104.csv" nodename="MYSQLNDB2"
+                        profiles="TOTAL_CPU_USAGE, DSK_TOTAL, INTERRUPTS, MEMORY_USAGE, NET_TOTAL, PROCS, IO_TOTAL, SYSTEM, VIRTUAL_MEMORY"
+                        startwith="false"/>
+<mapping
+                        filname="client0_AcceptStory"
+                        nodename="BENCHMARK" profiles="AcceptStory"
+                        startwith="false"/>
+<mapping
+                        filname="client0_Browse" nodename="BENCHMARK"
+                        profiles="Browse" startwith="false"/>
+<mapping
+                        filname="client0_BrowseCategories"
+                        nodename="BENCHMARK" profiles="BrowseCategories"
+                        startwith="false"/>
+<mapping
+                        filname="client0_BrowseStoriesInCategory"
+                        nodename="BENCHMARK"
+                        profiles="BrowseStoriesInCategory"
+                        startwith="false"/>
+<mapping
+                        filname="client0_ModerateComment"
+                        nodename="BENCHMARK" profiles="ModerateComment"
+                        startwith="false"/>
+<mapping
+                        filname="client0_OlderStories"
+                        nodename="BENCHMARK" profiles="OlderStories"
+                        startwith="false"/>
+<mapping
+                        filname="client0_PostComment"
+                        nodename="BENCHMARK" profiles="PostComment"
+                        startwith="false"/>
+<mapping
+                        filname="client0_Register" nodename="BENCHMARK"
+                        profiles="Register" startwith="false"/>
+<mapping
+                        filname="client0_RegisterUser"
+                        nodename="BENCHMARK" profiles="RegisterUser"
+                        startwith="false"/>
+<mapping
+                        filname="client0_RejectStory"
+                        nodename="BENCHMARK" profiles="RejectStory"
+                        startwith="false"/>
+<mapping
+                        filname="client0_ReviewStories"
+                        nodename="BENCHMARK" profiles="ReviewStories"
+                        startwith="false"/>
+<mapping
+                        filname="client0_Search" nodename="BENCHMARK"
+                        profiles="Search" startwith="false"/>
+<mapping
+                        filname="client0_SearchInComments"
+                        nodename="BENCHMARK" profiles="SearchInComments"
+                        startwith="false"/>
+<mapping
+                        filname="client0_SearchInStories"
+                        nodename="BENCHMARK" profiles="SearchInStories"
+                        startwith="false"/>
+<mapping
+                        filname="client0_SearchInUsers"
+                        nodename="BENCHMARK" profiles="SearchInUsers"
+                        startwith="false"/>
+<mapping
+                        filname="client0_StoreComment"
+                        nodename="BENCHMARK" profiles="StoreComment"
+                        startwith="false"/>
+<mapping
+                        filname="client0_StoreModerateLog"
+                        nodename="BENCHMARK" profiles="StoreModerateLog"
+                        startwith="false"/>
+<mapping
+                        filname="client0_StoreStory"
+                        nodename="BENCHMARK" profiles="StoreStory"
+                        startwith="false"/>
+<mapping
+                        filname="client0_StoriesOfTheDay"
+                        nodename="BENCHMARK" profiles="StoriesOfTheDay"
+                        startwith="false"/>
+<mapping
+                        filname="client0_SubmitStory"
+                        nodename="BENCHMARK" profiles="SubmitStory"
+                        startwith="false"/>
+<mapping
+                        filname="client0_ViewComment"
+                        nodename="BENCHMARK" profiles="ViewComment"
+                        startwith="false"/>
+<mapping
+                        filname="client0_ViewStory" nodename="BENCHMARK"
+                        profiles="ViewStory"
+                        startwith="false"/>
+</mappings><nodes>
+<node>
+<name>CONTROL</name>
+<ip>10.0.16.137</ip>
+</node>
+<node>
+<name>BENCHMARK</name>
+<ip>10.0.16.139</ip>
+</node>
+<node>
+<name>CLIENT1</name>
+<ip>10.0.16.142</ip>
+</node>
+<node>
+<name>CLIENT2</name>
+<ip>10.0.16.130</ip>
+</node>
+<node>
+<name>CLEINT3</name>
+<ip>10.0.16.132</ip>
+</node>
+<node>
+<name>CLIENT4</name>
+<ip>10.0.16.127</ip>
+</node>
+<node>
+<name>HTTPD</name>
+<ip>10.0.16.129</ip>
+</node>
+<node>
+<name>TOMCAT1</name>
+<ip>10.0.16.114</ip>
+</node>
+<node>
+<name>TOMCAT2</name>
+<ip>10.0.16.115</ip>
+</node>
+<node>
+<name>MYSQL_MGR</name>
+<ip>10.0.16.116</ip>
+</node>
+<node>
+<name>MYSQL1</name>
+<ip>10.0.16.109</ip>
+</node>
+<node>
+<name>MYSQL2</name>
+<ip>10.0.16.112</ip>
+</node>
+<node>
+<name>MYSQLNDB1</name>
+<ip>10.0.16.113</ip>
+</node>
+<node>
+<name>MYSQLNDB2</name>
+<ip>10.0.16.104</ip>
+</node>
+</nodes>
+<workloads><workload
+                        directory="3000-RW" name="3000"
+                        readonly="false"/>
+<workload directory="6000-RW"
+                        name="6000" readonly="false"/>
+<workload
+                        directory="1000-RO" name="1000"
+                        readonly="true"/>
+<workload directory="4000-RW"
+                        name="4000" readonly="false"/>
+<workload
+                        directory="2000-RO" name="2000"
+                        readonly="true"/>
+<workload directory="5000-RW"
+                        name="5000" readonly="false"/>
+<workload
+                        directory="7000-RO" name="7000"
+                        readonly="true"/>
+<workload directory="5000-RO"
+                        name="5000" readonly="true"/>
+<workload
+                        directory="4000-RO" name="4000"
+                        readonly="true"/>
+<workload directory="1000-RW"
+                        name="1000" readonly="false"/>
+<workload
+                        directory="7000-RW" name="7000"
+                        readonly="false"/>
+<workload directory="3000-RO"
+                        name="3000" readonly="true"/>
+<workload
+                        directory="2000-RW" name="2000"
+                        readonly="false"/>
+<workload directory="6000-RO"
+                        name="6000" readonly="true"/>
+</workloads>
+<dbinfo>
+<username>elba</username>
+<passowrd>elba</passowrd>
+<url>jdbc:mysql://localhost:3313/elba</url>
+<dbclass>com.mysql.jdbc.Driver</dbclass>
+</dbinfo>
+</datamapping>
