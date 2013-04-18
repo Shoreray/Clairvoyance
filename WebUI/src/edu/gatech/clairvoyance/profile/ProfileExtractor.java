@@ -35,8 +35,9 @@ public class ProfileExtractor {
 				
 				URL url=new File(classpath).toURI().toURL();
 				URL[] urls=new URL[]{url};
-				ClassLoader loader=new URLClassLoader(urls);
-				Class processorClass=loader.loadClass(processorClassName);
+				URLClassLoader loader=new URLClassLoader(urls);
+				Class<?> processorClass=loader.loadClass(processorClassName);
+				loader.close();
 				ProfileProcessor processor=(ProfileProcessor) processorClass.newInstance();
 				processors.add(processor);
 				System.out.println("Successfully loaded processor "+processorClassName);
@@ -49,8 +50,39 @@ public class ProfileExtractor {
 		
 	}
 	
+	public Map<String,List<Profile> > getProfileMapping(File datadirPath) throws Exception{
+		HashMap<String, List<Profile> > mappingHash=new HashMap<String,List<Profile> >();
+		for(ProfileProcessor processor:processors){
+			Map<String,List<Profile> > mapping=processor.process(datadirPath);
+			if(mapping == null){
+				continue;
+			}
+			for(String filename:mapping.keySet()){
+				List<Profile> partProfiles=mapping.get(filename);
+				if(!mappingHash.containsKey(filename)){
+					mappingHash.put(filename, new ArrayList<Profile>());
+					
+				}
+				ArrayList<Profile> arrProfiles=(ArrayList<Profile>)mappingHash.get(filename);
+				for(Profile profile:partProfiles){
+					arrProfiles.add(profile);
+				}
+			}
+		}
+		return mappingHash;
+	}
+	
 	public static void main(String[] args) throws Exception{
-		new ProfileExtractor();
+		Map<String,List<Profile> > mapping=(new ProfileExtractor()).getProfileMapping(new File("/home/xiangyu/ClairvoyanceSampleData/2013-03-09T070056-0500"));
+		for(String str:mapping.keySet()){
+        	List<Profile> profiles=mapping.get(str);
+        	System.out.println("profiles = "+profiles);
+        	break;
+        }
+        System.out.println("Applicable files: ");
+        for(String str:mapping.keySet()){
+        	System.out.println(str);
+        }
 	}
 
 }

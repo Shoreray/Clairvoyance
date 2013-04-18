@@ -64,4 +64,9 @@ public class Configuration {
 		
 	}
 
+	public String toXML(){
+		return null;
+	}
+	
+	
 }

@@ -3,8 +3,7 @@ package edu.gatech.clairvoyance.profile.processor;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import edu.gatech.clairvoyance.profile.*;
 
@@ -13,35 +12,45 @@ import edu.gatech.clairvoyance.profile.*;
  */
 public class DstatHeaderParser implements ProfileProcessor{
 
-    public static List<DstatProfile> process(String resultsDirectory) throws Exception {
-        File resultsDir = new File(resultsDirectory);
+    public Map<String,List<Profile> > process(File resultsDir) throws Exception {
+        Map<String,List<Profile> > mapping=new HashMap<String,List<Profile> >();
+        
         if (resultsDir.isDirectory()) {
             File[] dirs = resultsDir.listFiles();
             for (File dir : dirs) {
+            	//For each sub-data directory,
                 if (dir.isDirectory()) {
                     File[] files = dir.listFiles();
+                    List<Profile> profiles=null;
                     for (File file : files) {
+                    	//For each data file
                         if (file.getName().endsWith(".csv")) {
                             BufferedReader in = new BufferedReader(new FileReader(file));
                             String str;
                             while ((str = in.readLine()) != null) {
                                 if (str.startsWith("\"Dstat")) {
-                                    return createProfiles(in);
+                                	if(profiles==null){
+                                		profiles=createProfiles(in);
+                                	}
+                                	mapping.put(file.getName(), profiles);
+                                	
+                                    
                                 } else {
                                     in.close();
                                     break;
                                 }
                             }
-                        }
+                        }//End of if
+                        
                     }
                 }
             }
         }
-        return new ArrayList<DstatProfile>();
+        return mapping;
     }
 
-    private static List<DstatProfile> createProfiles(BufferedReader in) throws Exception {
-        List<DstatProfile> dstatProfiles = new ArrayList<DstatProfile>();
+    private static List<Profile> createProfiles(BufferedReader in) throws Exception {
+        List<Profile> dstatProfiles = new ArrayList<Profile>();
         String str;
         List<String> values = new ArrayList<String>();
         while ((str = in.readLine()) != null) {
@@ -83,8 +92,18 @@ public class DstatHeaderParser implements ProfileProcessor{
     }
 
     public static void main(String[] args) throws Exception {
-        String path = "D:\\georgia_tech\\Elba_SVN\\module\\mulini\\src\\dataimport";
-        List<DstatProfile> profiles = DstatHeaderParser.process(path);
-        System.out.println("profiles = " + profiles);
+        //String path = "D:\\georgia_tech\\Elba_SVN\\module\\mulini\\src\\dataimport";
+    	File dataDir=new File("/home/xiangyu/ClairvoyanceSampleData/2013-03-09T070056-0500");
+        Map<String,List<Profile> > mapping = (new DstatHeaderParser()).process(dataDir);
+        //System.out.println("profiles = " + profiles);
+        for(String str:mapping.keySet()){
+        	List<Profile> profiles=mapping.get(str);
+        	System.out.println("profiles = "+profiles);
+        	break;
+        }
+        System.out.println("Applicable files: ");
+        for(String str:mapping.keySet()){
+        	System.out.println(str);
+        }
     }
 }

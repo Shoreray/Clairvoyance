@@ -2,13 +2,14 @@ package edu.gatech.clairvoyance.profile.processor;
 
 import java.util.HashMap;
 import java.util.Map;
+import edu.gatech.clairvoyance.profile.*;
 
 /**
  * User: Deepal Jayasinghe
  * Date: 8/23/12
  * Time: 4:11 PM
  */
-public class DstatProfile {
+public class DstatProfile implements Profile{
     private String name;
     private Map<String, Integer> col2Index;
 
