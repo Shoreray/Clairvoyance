@@ -6,10 +6,12 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.gatech.clairvoyance.profile.*;
+
 /**
  * This is to pass the dstat file and create profile by using that
  */
-public class DstatHeaderParser {
+public class DstatHeaderParser implements ProfileProcessor{
 
     public static List<DstatProfile> process(String resultsDirectory) throws Exception {
         File resultsDir = new File(resultsDirectory);

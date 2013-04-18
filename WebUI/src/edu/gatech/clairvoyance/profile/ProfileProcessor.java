@@ -1,5 +1,5 @@
 package edu.gatech.clairvoyance.profile;
 
-public interface ProfilePrecessor {
+public interface ProfileProcessor {
 
 }

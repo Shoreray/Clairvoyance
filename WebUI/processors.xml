@@ -1,3 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <processors>
-	<classpath
+	<processor classpath="build" classname="edu.gatech.clairvoyance.profile.processor.DstatHeaderParser" />
+</processors>
