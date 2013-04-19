@@ -359,6 +359,11 @@ a:hover {
 	float: left;
 }
 
+.item  .other{
+	width: 150px;
+	float: left;
+}
+
 .item  .mode{
 	width: 85px;
 	margin-left: 20px;

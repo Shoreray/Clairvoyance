@@ -37,6 +37,7 @@
 	<script type="text/javascript">
 		$(document).ready( function() {
 			var nodes = 3;
+			$('#num').val(nodes);
 			
 			$('#add').click(function() {
 				nodes++;
@@ -44,11 +45,13 @@
 							+ "<input class='text' type='text' name='" + nodes + "_name'>"
 							+ "<input class='text' type='text' name='" + nodes + "_ip'></li>";
 				$('#nodes').append(html);
+				$('#num').val(nodes);
 			});
 			
 			$('#remove').click(function() {
 				$('#nodes li:last').remove();
 				nodes--;
+				$('#num').val(nodes);
 			});
 		});
 	</script>
@@ -81,6 +84,7 @@
 					<h4>Please fill in the name and IP for the node</h4>
 					<div class="entry">
 					<form name="files" method="get" action="files.jsp">
+						<input class="dir" id="num" name="num" type="hidden"></input>
 						<ul><li><div><ul id="nodes">
 							<li>
 								<span class="file">Node</span>

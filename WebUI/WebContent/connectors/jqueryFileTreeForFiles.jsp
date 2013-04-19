@@ -8,8 +8,7 @@
   * 21 April 2008
 */	
     String dir = request.getParameter("dir");
-	String parsers = request.getParameter("parser");
-	String servers = request.getParameter("server");
+	String option = request.getParameter("option");
     if (dir == null) {
     	return;
     }
@@ -40,7 +39,8 @@
 		// All files
 		for (String file : files) {
 		    if (!new File(dir, file).isDirectory()) {
-				out.print("<li>" + file + "</li>" + parsers + servers);
+				String node = "<select class='mode' name='" + file + "'>" + option + "</select>";
+				out.print("<li><span class='file'>" + file + "</span>" + node + "</li>");
 		    }
 		}
 		out.print("</ul>");
