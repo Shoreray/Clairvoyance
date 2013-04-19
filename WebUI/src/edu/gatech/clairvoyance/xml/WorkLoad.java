@@ -6,6 +6,11 @@ public class WorkLoad {
 	private String workload;
 	private boolean readonly;
 	
+	public WorkLoad(String directory,String workload,boolean readonly){
+		this.directory=directory;
+		this.workload=workload;
+		this.readonly=readonly;
+	}
 	
 	public String getDirectory() {
 		return directory;

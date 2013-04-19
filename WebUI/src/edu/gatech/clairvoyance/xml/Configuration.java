@@ -167,7 +167,8 @@ public class Configuration {
 	
 	public String toXML(){
 		StringBuilder buffer=new StringBuilder();
-		buffer.append("\n");
+		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+		buffer.append("<datamapping>\n");
 		buffer.append(XmlHelper.fromTag("name", experimentName));
 		buffer.append(XmlHelper.fromTag("description",description));
 		buffer.append(XmlHelper.fromTag("user",user));
@@ -208,7 +209,7 @@ public class Configuration {
 					buffer.append(", ");
 				}
 			}
-			buffer.append("\" startwith=\"false\" />");
+			buffer.append("\" startwith=\"false\" />\n");
 		}
 		buffer.append("</mappings>\n");
 		
@@ -230,7 +231,9 @@ public class Configuration {
 		}
 		buffer.append("</workloads>\n");
 		
-		buffer.append(dbinfo.toString());
+		if(dbinfo!=null){
+			buffer.append(dbinfo.toString());
+		}
 		
 		buffer.append("</datamapping>\n");
 		return buffer.toString();
@@ -238,6 +241,26 @@ public class Configuration {
 	
 	public static void main(String[] args) throws Exception{
 		Map<String,List<Profile> > mapping=(new ProfileExtractor()).getProfileMapping(new File("/home/xiangyu/ClairvoyanceSampleData/2013-03-09T070056-0500"));
+		Configuration config=new Configuration();
+		config.setApplicationName("Clairvoyance");
+		config.setCloudName("Invent");
+		config.setDate("2013-4-1");
+		config.setExperimentName("Test Clairvoyance");
+		config.setDescription("This is to test the configuration file generator of the Clairvoyance project.");
+		config.setUser("God Mie");
+		config.setProfileMapping(mapping);
+		for(String file:mapping.keySet()){
+			Node node=new Node("node of "+file,"192.168.0."+(int)Math.random()*255);
+			config.addNodeMapping(file, node);
+			
+		}
+		for(int i=0;i<10;i++){
+			config.addWorkloadInformation(new WorkLoad("Run"+i,""+(int)Math.random()*5000,Math.random()>0.5));
+			
+		}
+		config.addWorkloadInformation(new WorkLoad("Run1","1000",false));
+		config.addWorkloadInformation(new WorkLoad("Run1","1000",false));
+		System.out.println(config.toXML());
 		
 	}
 	
