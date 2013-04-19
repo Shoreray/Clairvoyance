@@ -50,8 +50,9 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li class="current_page_item"><a href="#">Homepage</a></li>
+						<li class="current_page_item"><a href="#">Home</a></li>
 						<li><a href="#">SubDir</a></li>
+						<li><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
 					</ul>
@@ -68,18 +69,14 @@
 					<div style="clear: both;">&nbsp;</div>
 					<div class="entry">
 						
-						<p>Choose the root directory which contains your data files</p>
+						<p>Choose the root directory which contains all your data files</p>
 						<p>The directory you chose: <span id="dirSpan"></span></p>
 						<div class="example">
 							<div id="fileTreeDemo_1" class="demo"></div>
 						</div>
-						<form name="files" method="get" action="files.jsp">
-							<input class="dir" name="dir" type="hidden"></input>
-							<p><input type="submit" name="submit" value="Find files" class="more"></input></p>
-						</form>
 						<form name="subdirs" method="get" action="dirs.jsp">
 							<input class="dir" name="dir" type="hidden"></input>
-							<p><input type="submit" name="submit" value="Find sub directories" class="more"></input></p>
+							<p><input type="submit" name="submit" value="Next Step" class="more"></input></p>
 						</form>
 					</div>
 				</div>
@@ -92,6 +89,7 @@
 		</div>
 		<div style="clear: both;">&nbsp;</div>
 	</div>
+	<!-- end #wrapper -->
 	<div id="footer">
 		<p>Copyright (c) 2013 Georgia Tech, College of Computing. All rights reserved. </p>
 	</div>
