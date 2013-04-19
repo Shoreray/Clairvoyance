@@ -169,7 +169,7 @@ a:hover {
 
 #menu {
 	float: right;
-	width: 500px;
+	width: 600px;
 	height: 90px;
 	margin: 0 auto;
 	padding: 0;
@@ -355,7 +355,7 @@ a:hover {
 }
 
 .item  .file{
-	width: 80px;
+	width: 160px;
 	float: left;
 }
 

@@ -9,6 +9,7 @@
 		Map<String, String[]> parameters = request.getParameterMap();
 		for(Directory dir : data.getSubDirs()){
 			String dirName = dir.getDirName();
+			System.out.println(dirName);
 			String[] modes = parameters.get(dirName + "_mode");
 			String[] randoms = parameters.get(dirName + "_random");
 			String[] texts = parameters.get(dirName + "_text");
@@ -72,6 +73,7 @@
 						<li class="current_page_item"><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
+						<li><a href="#">XML</a></li>
 					</ul>
 				</div>
 			</div>

@@ -1,5 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
+<%
+%>
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,6 +57,7 @@
 						<li><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
+						<li><a href="#">XML</a></li>
 					</ul>
 				</div>
 			</div>

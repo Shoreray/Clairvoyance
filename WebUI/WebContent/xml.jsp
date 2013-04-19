@@ -1,22 +1,67 @@
+<%@page import="edu.gatech.clairvoyance.xml.WorkLoad"%>
+<%@page import="edu.gatech.clairvoyance.session.Directory"%>
+<%@page import="edu.gatech.clairvoyance.session.Node"%>
 <%@page import="edu.gatech.clairvoyance.profile.ProfileExtractor"%>
 <%@page import="edu.gatech.clairvoyance.xml.DBInfo"%>
 <%@page import="edu.gatech.clairvoyance.xml.Configuration"%>
-<%@page import="java.util.Map, java.util.Map.Entry"%>
+<%@page import="java.util.Map,java.util.Map.Entry"%>
 <%@page import="java.io.File"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
 <%
 	Map<String, String[]> parameters = request.getParameterMap();
-
-	for(Entry<String, String[]> entry : parameters.entrySet()){
-		String fileName = entry.getKey();
-		String nodeName = entry.getValue()[0];
-		data.addFile2Node(fileName, nodeName);
+	String xml = "";
+	
+	String expName = parameters.get("ExpName")[0];
+	String expDesc = parameters.get("ExpDesc")[0];
+	String user = parameters.get("User")[0];
+	String date = parameters.get("Date")[0];
+	String cloud = parameters.get("Cloud")[0];
+	String userName = parameters.get("UserName")[0];
+	String pwd = parameters.get("Pwd")[0];
+	String url = parameters.get("Url")[0];
+	String dbclass = parameters.get("Dbclass")[0];
+	
+	DBInfo db = new DBInfo();
+	db.setDbclass(dbclass);
+	db.setPassword(pwd);
+	db.setUrl(url);
+	db.setUsername(userName);
+	ProfileExtractor extractor = new ProfileExtractor();
+	
+	try{
+		File dataDir = new File(data.getRootDir());
+		File processorFile = new File("processors.xml");
 		
-		System.out.println(fileName + " " + nodeName);
+		
+		Configuration conf = new Configuration();
+		conf.setApplicationName("");
+		conf.setCloudName(cloud);
+		conf.setDate(date);
+		conf.setDbinfo(db);
+		conf.setDescription(expDesc);
+		conf.setExperimentName(expName);
+		conf.setProfileMapping(extractor.getProfileMapping(dataDir));
+		conf.setUser(user);
+		for(Entry<String, Node> entry : data.getFile2Node().entrySet()){
+			Node node = entry.getValue();
+			edu.gatech.clairvoyance.xml.Node item 
+						= new edu.gatech.clairvoyance.xml.Node(node.getName(), node.getIp());
+			conf.addNodeMapping(entry.getKey(), item);
+		}
+		
+		for(Entry<String, Directory> entry : data.getName2dir().entrySet()){
+			Directory dir = entry.getValue();
+			boolean mode = dir.getMode().equals("ReadOnly") ? true : false;
+			WorkLoad workLoad = new WorkLoad(dir.getDirName(), dir.getName(), mode);
+			conf.addWorkloadInformation(workLoad);
+		}
+		
+		xml = conf.toXML();
+	} catch(Exception e){
+		e.printStackTrace();
 	}
-
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -55,8 +100,8 @@
 						<li><a href="#">SubDir</a></li>
 						<li><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
-						<li class="current_page_item"><a href="#">Other</a></li>
-						<li><a href="#">XML</a></li>
+						<li><a href="#">Other</a></li>
+						<li class="current_page_item"><a href="#">XML</a></li>
 					</ul>
 				</div>
 			</div>
@@ -66,53 +111,9 @@
 		<div id="page">
 			<div id="content">
 				<div class="post item">
-					<h2 class="title">The last step!</h2>
+					<h2 class="title">The generated xml</h2>
 					<h4>Please fill in other info</h4>
-					<form name="xml" method="get" action="xml.jsp">
-						<ul><li><div><ul>
-							<li>
-								<span class="other">Item</span>
-								<span class="text nobackground">Data</span>
-							</li>
-							<li>
-								<span class="other">Experiment Name</span>
-								<input class="text" type="text" name="ExpName">
-							</li>
-							<li>
-								<span class="other">Experiment Description</span>
-								<input class="text" type="text" name="ExpDesc">
-							</li>
-							<li>
-								<span class="other">User</span>
-								<input class="text" type="text" name="User">
-							</li>
-							<li>
-								<span class="other">Date</span>
-								<input class="text" type="text" name="Date">
-							</li>
-							<li>
-								<span class="other">Cloud</span>
-								<input class="text" type="text" name="Cloud">
-							</li>
-							<li>
-								<span class="other">UserName</span>
-								<input class="text" type="text" name="UserName">
-							</li>
-							<li>
-								<span class="other">Password</span>
-								<input class="text" type="text" name="Pwd">
-							</li>
-							<li>
-								<span class="other">URL</span>
-								<input class="text" type="text" name="Url">
-							</li>
-							<li>
-								<span class="other">DB class</span>
-								<input class="text" type="text" name="Dbclass">
-							</li>
-						</ul></div></li></ul>
-						<p><input type="submit" value="Generate!" class="more"></input></p>
-					</form>
+					<p><%=xml%></p>
 				</div>
 				<div style="clear: both;">&nbsp;</div>
 			</div>

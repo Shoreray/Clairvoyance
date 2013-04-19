@@ -55,6 +55,7 @@
 						<li><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
+						<li><a href="#">XML</a></li>
 					</ul>
 				</div>
 			</div>

@@ -86,6 +86,7 @@
 						<li><a href="#">Nodes</a></li>
 						<li class="current_page_item"><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
+						<li><a href="#">XML</a></li>
 					</ul>
 				</div>
 			</div>

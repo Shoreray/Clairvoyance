@@ -16,6 +16,7 @@ public class Data {
 		subDirs = new ArrayList<Directory>();
 		name2dir = new HashMap<String, Directory>();
 		nodeMap = new HashMap<String, Node>();
+		file2node = new HashMap<>();
 	}
 	
 	public String getRootDir() {

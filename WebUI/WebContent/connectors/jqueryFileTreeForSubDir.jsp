@@ -35,6 +35,8 @@
 			out.print("<li><span class='file'>Dir name</span><span class='mode nobackground'>mode</span>"
 						+ "<span class='text nobackground'>name</span>"
 						+ "<span class='random nobackground'>randomly</span></li>");
+		data.getSubDirs().clear();
+		data.getName2dir().clear();
 		for (String file : files) {
 		    if (new File(dir, file).isDirectory()) {
 				String mode = "<select class='mode' name='" + file + "_mode'>"
