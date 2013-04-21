@@ -107,7 +107,7 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li class="done"><a href="#">Home</a></li>
+						<li><a href="index.jsp">Home</a></li>
 						<li class="done"><a href="#">SubDir</a></li>
 						<li class="done"><a href="#">Nodes</a></li>
 						<li class="done"><a href="#">Files</a></li>
