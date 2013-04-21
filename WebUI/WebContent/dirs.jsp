@@ -10,6 +10,9 @@
 	if (new File(dir).exists()) {
 		readRes="success";
 		data.setRootDir(dir);
+	} else {
+		String redirectURL = "index.jsp?msg=Please select the root directory!";
+	    response.sendRedirect(redirectURL);
 	}
 %>
 

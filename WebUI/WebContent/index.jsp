@@ -1,6 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <jsp:useBean id="data" scope="session" class="edu.gatech.clairvoyance.session.Data"/>
 <%
+	String msg=request.getParameter("msg");
+	if(msg == null) msg = "";
 %>
 <html>
 <head>
@@ -69,6 +71,7 @@
 				<div class="post">
 					<h2 class="title">Hey, Welcome!</h2>
 					<h4>This web is designed to help you perform automated data profile and extraction. </h4>
+					<h4><%=msg%></h4>
 					<div style="clear: both;">&nbsp;</div>
 					<div class="entry">
 						
