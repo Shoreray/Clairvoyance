@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Data {
 	private String rootDir;
+	private String outputFile;
 	private List<Directory> subDirs;
 	private HashMap<String, Directory> name2dir;
 	private HashMap<String, Node> nodeMap;
@@ -19,6 +20,22 @@ public class Data {
 		file2node = new HashMap<>();
 	}
 	
+	public String getOutputFile() {
+		return outputFile;
+	}
+
+	public void setOutputFile(String outputFile) {
+		this.outputFile = outputFile;
+	}
+
+	public HashMap<String, Node> getFile2node() {
+		return file2node;
+	}
+
+	public void setFile2node(HashMap<String, Node> file2node) {
+		this.file2node = file2node;
+	}
+
 	public String getRootDir() {
 		return rootDir;
 	}

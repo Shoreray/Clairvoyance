@@ -1,3 +1,5 @@
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.PrintWriter"%>
 <%@page import="edu.gatech.clairvoyance.xml.WorkLoad"%>
 <%@page import="edu.gatech.clairvoyance.session.Directory"%>
 <%@page import="edu.gatech.clairvoyance.session.Node"%>
@@ -12,6 +14,7 @@
 <%
 	Map<String, String[]> parameters = request.getParameterMap();
 	String xml = "";
+	String outputPath = "";
 	
 	String expName = parameters.get("ExpName")[0];
 	String expDesc = parameters.get("ExpDesc")[0];
@@ -33,7 +36,6 @@
 	try{
 		File dataDir = new File(data.getRootDir());
 		File processorFile = new File("processors.xml");
-		
 		
 		Configuration conf = new Configuration();
 		conf.setApplicationName("");
@@ -59,6 +61,15 @@
 		}
 		
 		xml = conf.toXML();
+		//File output = new File("output.xml");
+		//PrintWriter writer = new PrintWriter(output);
+		//writer.println(xml);
+		//writer.close();
+		//outputPath = output.getAbsolutePath();
+		
+		//data.setOutputFile(outputPath);
+		//File current = new File(".");
+		//outputPath = current.getAbsolutePath();
 	} catch(Exception e){
 		e.printStackTrace();
 	}
@@ -81,7 +92,7 @@
 		
 	<script type="text/javascript">	
 		$(document).ready( function() {
-			
+			//$('#display').text($('#hidden').html());
 		});
 	</script>
 	<title>Final Configure</title>
@@ -112,8 +123,13 @@
 			<div id="content">
 				<div class="post item">
 					<h2 class="title">The generated xml</h2>
-					<h4>Please fill in other info</h4>
-					<p><%=xml%></p>
+					<h4>Please check the xml, and download it!</h4>
+					<form name="nodes" method="post" action="download.jsp">
+						<textarea id="display" style="width:900px; height:450px" name="xml"><%=xml%></textarea>
+						<p>  </p>
+						<p><input type="submit" value="Download" class="more"></input></p>
+					</form>
+					<div id="hidden" style="display: none"><%=xml%></div>
 				</div>
 				<div style="clear: both;">&nbsp;</div>
 			</div>
