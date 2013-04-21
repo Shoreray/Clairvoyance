@@ -174,7 +174,13 @@ public class Configuration {
 		buffer.append(XmlHelper.fromTag("user",user));
 		buffer.append(XmlHelper.fromTag("date",date));
 		buffer.append(XmlHelper.fromTag("cloud",cloudName));
-		buffer.append(XmlHelper.fromTag("nodecount",""+nodeMapping.values().size()));
+		ArrayList<Node> nodes=new ArrayList<Node>();
+		for(String filename:nodeMapping.keySet()){
+			if(!nodes.contains(nodeMapping.get(filename))){
+				nodes.add(nodeMapping.get(filename));
+			}
+		}
+		buffer.append(XmlHelper.fromTag("nodecount",""+nodes.size()));
 		buffer.append(XmlHelper.fromTag("rampuptime",null));
 		buffer.append(XmlHelper.fromTag("runningtime",null));
 		buffer.append(XmlHelper.fromTag("downramptime",null));
@@ -214,12 +220,7 @@ public class Configuration {
 		buffer.append("</mappings>\n");
 		
 		buffer.append("<nodes>\n");
-		ArrayList<Node> nodes=new ArrayList<Node>();
-		for(String filename:nodeMapping.keySet()){
-			if(!nodes.contains(nodeMapping.get(filename))){
-				nodes.add(nodeMapping.get(filename));
-			}
-		}
+		
 		for(Node n:nodes){
 			buffer.append(n.toString());
 		}
