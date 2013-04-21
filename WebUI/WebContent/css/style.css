@@ -203,14 +203,15 @@ a:hover {
 	border: none;
 }
 
-#menu a:hover, #menu .current_page_item a {
+#menu .current_page_item a {
 	background: url(../images/img01.jpg) repeat;
 	border-radius: 8px;
 	text-decoration: none;
 	color: #FFFFFF;
 }
 
-#menu .current_page_item a {
+#menu .done a {
+	color: #E0E0E0;
 }
 
 /* Page */

@@ -95,7 +95,7 @@
 			//$('#display').text($('#hidden').html());
 		});
 	</script>
-	<title>Final Configure</title>
+	<title>Final XML</title>
 </head>
 
 <body>
@@ -107,11 +107,11 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">SubDir</a></li>
-						<li><a href="#">Nodes</a></li>
-						<li><a href="#">Files</a></li>
-						<li><a href="#">Other</a></li>
+						<li class="done"><a href="#">Home</a></li>
+						<li class="done"><a href="#">SubDir</a></li>
+						<li class="done"><a href="#">Nodes</a></li>
+						<li class="done"><a href="#">Files</a></li>
+						<li class="done"><a href="#">Other</a></li>
 						<li class="current_page_item"><a href="#">XML</a></li>
 					</ul>
 				</div>

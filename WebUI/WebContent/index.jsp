@@ -77,7 +77,7 @@
 						<div class="example">
 							<div id="fileTreeDemo_1" class="demo"></div>
 						</div>
-						<form name="subdirs" method="get" action="dirs.jsp">
+						<form name="subdirs" method="post" action="dirs.jsp">
 							<input class="dir" name="dir" type="hidden"></input>
 							<p><input type="submit" name="submit" value="Next Step" class="more"></input></p>
 						</form>

@@ -33,8 +33,7 @@
 		// All dirs
 		if(files.length > 0)
 			out.print("<li><span class='file'>Dir name</span><span class='mode nobackground'>mode</span>"
-						+ "<span class='text nobackground'>name</span>"
-						+ "<span class='random nobackground'>randomly</span></li>");
+						+ "<span class='text nobackground'>name</span>");
 		data.getSubDirs().clear();
 		data.getName2dir().clear();
 		for (String file : files) {
@@ -49,7 +48,7 @@
 					+ "<option value='false'>false</option>"
 					+ "</select>";
 					
-				out.print("<li><span class='file'>" + file + "</span>" + mode + text + random + "</li>");
+				out.print("<li><span class='file'>" + file + "</span>" + mode + text + "</li>");
 				Directory directory = new Directory(file);
 				data.addSubDir(directory);
 		    }

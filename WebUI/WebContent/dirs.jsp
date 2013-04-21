@@ -50,7 +50,7 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li class="done"><a href="#">Home</a></li>
 						<li class="current_page_item"><a href="#">SubDir</a></li>
 						<li><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
@@ -69,7 +69,7 @@
 					<h4>Read directory <%=readRes%>!</h4>
 					<h4>The sub-directories in : <span id="dir"><%=dir%></span></h4>
 					<h4>Please select mode, random type and enter names</h4>
-					<form name="nodes" method="get" action="nodes.jsp">
+					<form name="nodes" method="post" action="nodes.jsp">
 						<ul><li>
 							<div id="test">
 							</div>

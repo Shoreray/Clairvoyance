@@ -46,6 +46,6 @@ public class Directory {
 	}
 	
 	public String toString(){
-		return dirName + " " + name + " " + mode + " " + random;
+		return dirName + " " + name + " " + mode;
 	}
 }

@@ -11,11 +11,11 @@
 			String dirName = dir.getDirName();
 			System.out.println(dirName);
 			String[] modes = parameters.get(dirName + "_mode");
-			String[] randoms = parameters.get(dirName + "_random");
+			//String[] randoms = parameters.get(dirName + "_random");
 			String[] texts = parameters.get(dirName + "_text");
 			dir.setMode(modes[0]);
 			dir.setName(texts[0]);
-			dir.setRandom(randoms[0]);
+			//dir.setRandom(randoms[0]);
 		}
 	}
 %>
@@ -68,8 +68,8 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">SubDir</a></li>
+						<li class="done"><a href="#">Home</a></li>
+						<li class="done"><a href="#">SubDir</a></li>
 						<li class="current_page_item"><a href="#">Nodes</a></li>
 						<li><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
@@ -85,7 +85,7 @@
 					<h2 class="title">Please configure the nodes info</h2>
 					<h4>Please fill in the name and IP for the node</h4>
 					<div class="entry">
-					<form name="files" method="get" action="files.jsp">
+					<form name="files" method="post" action="files.jsp">
 						<input class="dir" id="num" name="num" type="hidden"></input>
 						<ul><li><div><ul id="nodes">
 							<li>

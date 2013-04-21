@@ -51,10 +51,10 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">SubDir</a></li>
-						<li><a href="#">Nodes</a></li>
-						<li><a href="#">Files</a></li>
+						<li class="done"><a href="#">Home</a></li>
+						<li class="done"><a href="#">SubDir</a></li>
+						<li class="done"><a href="#">Nodes</a></li>
+						<li class="done"><a href="#">Files</a></li>
 						<li class="current_page_item"><a href="#">Other</a></li>
 						<li><a href="#">XML</a></li>
 					</ul>
@@ -68,7 +68,7 @@
 				<div class="post item">
 					<h2 class="title">The last step!</h2>
 					<h4>Please fill in other info</h4>
-					<form name="xml" method="get" action="xml.jsp">
+					<form name="xml" method="post" action="xml.jsp">
 						<ul><li><div><ul>
 							<li>
 								<span class="other">Item</span>
@@ -93,6 +93,10 @@
 							<li>
 								<span class="other">Cloud</span>
 								<input class="text" type="text" name="Cloud">
+							</li>
+							<li>
+								<span style="background: none">Database Information Below</span>
+								<span class="text nobackground"></span>
 							</li>
 							<li>
 								<span class="other">UserName</span>

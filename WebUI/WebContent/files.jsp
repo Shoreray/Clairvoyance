@@ -81,9 +81,9 @@
 				</div>
 				<div id="menu">
 					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="#">SubDir</a></li>
-						<li><a href="#">Nodes</a></li>
+						<li class="done"><a href="#">Home</a></li>
+						<li class="done"><a href="#">SubDir</a></li>
+						<li class="done"><a href="#">Nodes</a></li>
 						<li class="current_page_item"><a href="#">Files</a></li>
 						<li><a href="#">Other</a></li>
 						<li><a href="#">XML</a></li>
@@ -100,7 +100,7 @@
 					<h4>Read directory <%=readRes%>!</h4>
 					<h4>The files in : <span id="dir"><%=dir%></span></h4>
 					<h4>Please select node info for each file</h4>
-					<form name="other" method="get" action="other.jsp">
+					<form name="other" method="post" action="other.jsp">
 						<ul><li>
 							<div id="test">
 							</div>
