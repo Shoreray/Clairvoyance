@@ -127,7 +127,10 @@
 					<form name="nodes" method="post" action="download.jsp">
 						<textarea id="display" style="width:900px; height:450px" name="xml"><%=xml%></textarea>
 						<p>  </p>
-						<p><input type="submit" value="Download" class="more"></input></p>
+						<p>
+							<input type="submit" value="Download" class="more"></input>
+							<input type="submit" value="Upload" class="more"></input>
+						</p>
 					</form>
 					<div id="hidden" style="display: none"><%=xml%></div>
 				</div>

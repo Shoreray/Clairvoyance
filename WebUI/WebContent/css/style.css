@@ -292,6 +292,19 @@ a:hover {
 	text-decoration: none;
 }
 
+.nodes_opt {
+	display: block;
+	float: left;
+	width: 128px;
+	padding: 10px 5px;
+	margin-right: 10px;
+	background: #222222;
+	border-radius: 8px;
+	color: #9F9F9F;
+	text-align: center;
+	text-decoration: none;
+}
+
 .comments {
 	display: block;
 	float: left;
@@ -318,7 +331,7 @@ a:hover {
 
 .item li ul {
 	margin: 0px 0px;
-	padding-bottom: 60px;
+	padding-bottom: 40px;
 }
 
 .item li li {

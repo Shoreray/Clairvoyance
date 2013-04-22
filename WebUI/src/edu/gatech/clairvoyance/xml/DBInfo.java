@@ -33,13 +33,13 @@ public class DBInfo {
 	public String toString(){
 		StringBuilder buffer=new StringBuilder();
 		buffer.append("\n");
-		buffer.append(XmlHelper.fromTag("username", username));
+		buffer.append("\t\t" + XmlHelper.fromTag("username", username));
 		
-		buffer.append(XmlHelper.fromTag("password", password));
+		buffer.append("\t\t" + XmlHelper.fromTag("password", password));
 		
-		buffer.append(XmlHelper.fromTag("url", url));
+		buffer.append("\t\t" + XmlHelper.fromTag("url", url));
 		
-		buffer.append(XmlHelper.fromTag("dbclass", dbclass));
+		buffer.append("\t\t" + XmlHelper.fromTag("dbclass", dbclass));
 		
 		return XmlHelper.fromTag("dbinfo", buffer.toString());
 	}

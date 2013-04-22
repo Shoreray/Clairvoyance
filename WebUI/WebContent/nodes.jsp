@@ -110,9 +110,10 @@
 							</li>
 						</ul></div>
 						<p>
-							<a id='add'>Add More Nodes  </a>
-							<a id='remove'>Remove last Nodes</a>  
+							<a id='add' class='nodes_opt'>Add More Nodes  </a>
+							<a id='remove' class='nodes_opt'>Remove last Nodes</a>  
 						</p>
+						<div style="clear: both;">&nbsp;</div>
 						</li></ul>
 						<p><input type="submit" name="submit" value="Next Step" class="more"></input></p>
 					</form></div>

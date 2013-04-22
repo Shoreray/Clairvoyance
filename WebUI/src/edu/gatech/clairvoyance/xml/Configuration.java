@@ -169,23 +169,23 @@ public class Configuration {
 		StringBuilder buffer=new StringBuilder();
 		buffer.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		buffer.append("<datamapping>\n");
-		buffer.append(XmlHelper.fromTag("name", experimentName));
-		buffer.append(XmlHelper.fromTag("description",description));
-		buffer.append(XmlHelper.fromTag("user",user));
-		buffer.append(XmlHelper.fromTag("date",date));
-		buffer.append(XmlHelper.fromTag("cloud",cloudName));
+		buffer.append("\t" + XmlHelper.fromTag("name", experimentName));
+		buffer.append("\t" + XmlHelper.fromTag("description",description));
+		buffer.append("\t" + XmlHelper.fromTag("user",user));
+		buffer.append("\t" + XmlHelper.fromTag("date",date));
+		buffer.append("\t" + XmlHelper.fromTag("cloud",cloudName));
 		ArrayList<Node> nodes=new ArrayList<Node>();
 		for(String filename:nodeMapping.keySet()){
 			if(!nodes.contains(nodeMapping.get(filename))){
 				nodes.add(nodeMapping.get(filename));
 			}
 		}
-		buffer.append(XmlHelper.fromTag("nodecount",""+nodes.size()));
-		buffer.append(XmlHelper.fromTag("rampuptime",null));
-		buffer.append(XmlHelper.fromTag("runningtime",null));
-		buffer.append(XmlHelper.fromTag("downramptime",null));
-		buffer.append(XmlHelper.fromTag("application",applicationName));
-		buffer.append("<profiles>\n");
+		buffer.append("\t" + XmlHelper.fromTag("nodecount",""+nodes.size()));
+		buffer.append("\t" + XmlHelper.fromTag("rampuptime",null));
+		buffer.append("\t" + XmlHelper.fromTag("runningtime",null));
+		buffer.append("\t" + XmlHelper.fromTag("downramptime",null));
+		buffer.append("\t" + XmlHelper.fromTag("application",applicationName));
+		buffer.append("\t" + "<profiles>\n");
 		ArrayList<Profile> profiles=new ArrayList<Profile>();
 		for(List<Profile> list:profileMapping.values()){
 			for(Profile p:list){
@@ -197,10 +197,10 @@ public class Configuration {
 		for(Profile profile:profiles){
 			buffer.append(profile.toString());
 		}
-		buffer.append("</profiles>\n");
-		buffer.append("<mappings>\n");
+		buffer.append("\t" + "</profiles>\n");
+		buffer.append("\t" + "<mappings>\n");
 		for(String filename:profileMapping.keySet()){
-			buffer.append("<mapping filename=\"");
+			buffer.append("\t\t" + "<mapping filename=\"");
 			buffer.append(filename);
 			if(nodeMapping.get(filename)!=null){
 				buffer.append("\" nodename=\"");
@@ -217,23 +217,23 @@ public class Configuration {
 			}
 			buffer.append("\" startwith=\"false\" />\n");
 		}
-		buffer.append("</mappings>\n");
+		buffer.append("\t" + "</mappings>\n");
 		
-		buffer.append("<nodes>\n");
+		buffer.append("\t" + "<nodes>\n");
 		
 		for(Node n:nodes){
-			buffer.append(n.toString());
+			buffer.append("\t\t" + n.toString());
 		}
-		buffer.append("</nodes>\n");
+		buffer.append("\t" + "</nodes>\n");
 		
-		buffer.append("<workloads>\n");
+		buffer.append("\t" + "<workloads>\n");
 		for(WorkLoad wl:workloadInformation){
-			buffer.append(wl.toString());
+			buffer.append("\t\t" + wl.toString());
 		}
-		buffer.append("</workloads>\n");
+		buffer.append("\t" + "</workloads>\n");
 		
 		if(dbinfo!=null){
-			buffer.append(dbinfo.toString());
+			buffer.append("\t" + dbinfo.toString());
 		}
 		
 		buffer.append("</datamapping>\n");

@@ -32,20 +32,20 @@ public class DstatProfile extends Profile{
     @Override
     public String toString() {
         StringBuilder buffer = new StringBuilder();
-        buffer.append("<profile>\n");
-        buffer.append("<separator>,</separator>\n");
-        buffer.append("<resource-name>").append(name).append("</resource-name>\n");
-        buffer.append("<processor-class>dataimport.filter.CSVFileProcessor</processor-class>\n");
+        buffer.append("\t\t" + "<profile>\n");
+        buffer.append("\t\t\t" + "<separator>,</separator>\n");
+        buffer.append("\t\t\t" + "<resource-name>").append(name).append("</resource-name>\n");
+        buffer.append("\t\t\t" + "<processor-class>dataimport.filter.CSVFileProcessor</processor-class>\n");
         for (String key : col2Index.keySet()) {
-            buffer.append("<column index=\"")
+            buffer.append("\t\t\t" + "<column index=\"")
                     .append(col2Index.get(key))
                     .append("\" colname=")
                     .append(key)
                     .append(" datatype=\"double\"/>\n");
         }
-        buffer.append("<start-index>10</start-index>\n");
-        buffer.append("<end-index>0</end-index>\n");
-        buffer.append("</profile>\n");
+        buffer.append("\t\t\t" + "<start-index>10</start-index>\n");
+        buffer.append("\t\t\t" + "<end-index>0</end-index>\n");
+        buffer.append("\t\t" + "</profile>\n");
         return buffer.toString();
     }
 }
