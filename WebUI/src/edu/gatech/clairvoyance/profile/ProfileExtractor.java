@@ -35,7 +35,7 @@ public class ProfileExtractor {
 				
 				URL url=new File(classpath).toURI().toURL();
 				URL[] urls=new URL[]{url};
-				URLClassLoader loader=new URLClassLoader(urls);
+				URLClassLoader loader=new URLClassLoader(urls, ProfileProcessor.class.getClassLoader());
 				Class<?> processorClass=loader.loadClass(processorClassName);
 				loader.close();
 				ProfileProcessor processor=(ProfileProcessor) processorClass.newInstance();
