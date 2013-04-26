@@ -33,7 +33,7 @@
 		// All dirs
 		if(files.length > 0)
 			out.print("<li><span class='file'>Dir name</span><span class='mode nobackground'>mode</span>"
-						+ "<span class='text nobackground'>name</span>");
+						+ "<span class='text nobackground'>workload</span>");
 		data.getSubDirs().clear();
 		data.getName2dir().clear();
 		for (String file : files) {

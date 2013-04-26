@@ -31,11 +31,11 @@
 	db.setPassword(pwd);
 	db.setUrl(url);
 	db.setUsername(userName);
-	ProfileExtractor extractor = new ProfileExtractor();
 	
 	try{
 		File dataDir = new File(data.getRootDir());
 		File processorFile = new File("processors.xml");
+		ProfileExtractor extractor = new ProfileExtractor(processorFile);
 		
 		Configuration conf = new Configuration();
 		conf.setApplicationName("");

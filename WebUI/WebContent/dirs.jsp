@@ -71,7 +71,7 @@
 					<h2 class="title">Results for sub directories</h2>
 					<h4>Read directory <%=readRes%>!</h4>
 					<h4>The sub-directories in : <span id="dir"><%=dir%></span></h4>
-					<h4>Please select mode, random type and enter names</h4>
+					<h4>Please select mode, and enter workload information</h4>
 					<form name="nodes" method="post" action="nodes.jsp">
 						<ul><li>
 							<div id="test">
